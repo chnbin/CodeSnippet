@@ -1,5 +1,6 @@
 class Person():
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
 
-someone = Person()
+man = Person('Chen-Ping')
+print(man.name)
