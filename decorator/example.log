@@ -1,0 +1,4 @@
+2018-11-21 21:30:06,415 root INFO Running add with args: (10, 5).
+2018-11-21 21:30:06,415 root INFO Running sub with args: (3, 1).
+2018-11-21 21:30:06,415 root INFO Running div with args: (14, 7).
+2018-11-21 21:30:06,415 root INFO Running mul with args: (99, 7).
