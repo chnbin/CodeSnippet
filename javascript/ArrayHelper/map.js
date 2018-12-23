@@ -8,7 +8,7 @@
 
 const nums = [1, 2, 3, 4, 5];
 
-let result = nums.map((num) => {
+const result = nums.map((num) => {
   return num * num;
 });
 
@@ -16,12 +16,12 @@ console.log(result);
 
 // A simple Array.map example 2
 const images = [
-  { height: '1024px', width: '768px' },
-  { height: '800px', width: '600px' },
-  { height: '1320px', width: '976px' }
+  {height: '1024px', width: '768px'},
+  {height: '800px', width: '600px'},
+  {height: '1320px', width: '976px'},
 ];
 
-let heights = images.map((image) => {
+const heights = images.map((image) => {
   return image.height;
 });
 

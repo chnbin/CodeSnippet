@@ -22,6 +22,10 @@ nums.forEach((num) => {
 console.log(`Sum of nums: ${sum}`);
 
 // You can do like this....
+/**
+ * Add num to sum
+ * @param {number} num post.
+ */
 function adder(num) {
   sum += num;
 }
@@ -33,15 +37,15 @@ console.log(`Sum of nums: ${sum}`);
 
 // A simple Array.forEach example 3
 const images = [
-  { height: 1024, width: 768 },
-  { height: 800, width: 600 },
-  { height: 1320, width: 976 }
+  {height: 1024, width: 768},
+  {height: 800, width: 600},
+  {height: 1320, width: 976},
 ];
 
-let areas = [];
+const areas = [];
 
 images.forEach((image)=>{
-  areas.push(image.height * image.width); 
+  areas.push(image.height * image.width);
 });
 
 console.log(areas);
