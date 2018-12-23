@@ -30,3 +30,18 @@ sum = 0;
 
 nums.forEach(adder);
 console.log(`Sum of nums: ${sum}`);
+
+// A simple Array.forEach example 3
+const images = [
+  { height: 1024, width: 768 },
+  { height: 800, width: 600 },
+  { height: 1320, width: 976 }
+];
+
+let areas = [];
+
+images.forEach((image)=>{
+  areas.push(image.height * image.width); 
+});
+
+console.log(areas);
