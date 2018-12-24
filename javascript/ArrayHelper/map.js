@@ -26,3 +26,29 @@ const heights = images.map((image) => {
 });
 
 console.log(heights);
+
+
+// Return an array consisting of the largest number from
+// each provided sub-array.
+
+/**
+ * Find the largest number from item.
+ * @param {number[]} arr a number list.
+ * @return {number} The largest number of arr.
+ */
+function largestOfFour(arr) {
+  // You can do this!
+  return arr.map((item) => {
+    return Math.max.apply(null, item);
+  });
+}
+
+const tmp = largestOfFour([
+  [4, 9, 1, 3],
+  [13, 35, 18, 26],
+  [32, 35, 97, 39],
+  [1000000, 1001, 857, 1],
+]);
+
+console.log(tmp);
+
