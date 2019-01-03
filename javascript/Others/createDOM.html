@@ -1,9 +1,12 @@
 <html>
   <script src="createDOM.js"></script>
+  <script src="syncProblem.js"></script>
   <body>
     <ul id="js-list">
     </ul>
     <input type="button" onclick="createDOM()" value="Create DOM">
     <input type="button" onclick="createDOMWithClickEvent()" value="Create DOM with click event">
+    <input type="button" onclick="aSyncProblem()" value="Go">
+    <input type="button" onclick="aSyncProblemWithPromise()" value="Promise">
   </body>
 </html>
