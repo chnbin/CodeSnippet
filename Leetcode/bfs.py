@@ -191,7 +191,7 @@ class Solution(object):
                         if dist < rooms[x+dx][y+dy]:
                             rooms[x+dx][y+dy] = dist
                             queue.append((x+dx, y+dy))
-
+    # 490 The Mazes
     def hasPath(self, maze, start, destination):
         """
         https://leetcode.com/problems/the-maze/
@@ -224,3 +224,107 @@ class Solution(object):
                 if maze[row][col]==0:
                     queue.append([row,col])
         return False
+    # 529. Minesweeper
+    def updateBoard(self, board, click):
+        m = len(board)
+        n = len(board[0])
+        queue = [[click[0],click[1]]]
+        queue = collections.deque()
+        queue.append((click[0], click[1]))
+        directs = [[-1,-1],[-1,1],[-1,0],[0,-1],[0,1],[1,-1],[1,0],[1,1]]
+        
+        while queue:
+            point = queue.pop()
+            x = point[0]
+            y = point[1]
+            
+            if board[x][y] == "M":
+                board[x][y] = "X"
+            else:
+                neibors = []
+                mineCount = 0
+                for direct in directs:
+                    i = x + direct[0]
+                    j = y + direct[1]
+                    
+                    if 0<=i<m and 0<=j<n:
+                        neibors.append([i,j])
+                        if board[i][j] == "M":
+                            mineCount += 1
+                if mineCount > 0:
+                    board[x][y] = str(mineCount)
+                else:
+                    board[x][y] = "B"
+                    for neibor in neibors:
+                        if board[neibor[0]][neibor[1]] == "E":
+                            queue.append([neibor[0],neibor[1]])
+        return board
+    
+    # 542. 01 Matrix
+    def updateMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        # 同286一個pattern
+        m = len(matrix)
+        n = len(matrix[0])
+        queue = []
+        for i in range(0, m):
+            for j in range(0, n):
+                if matrix[i][j] != 0:
+                    matrix[i][j] = 2**32 - 1
+                else:
+                    queue.append([i,j])
+        for x,y in queue:
+            for r,c in [[x+1,y],[x-1,y],[x,y+1],[x,y-1]]:
+                dist = matrix[x][y] + 1
+                if 0<=r<m and 0<=c<n and matrix[r][c] > dist:
+                    matrix[r][c] = dist
+                    queue.append([r,c])
+        return matrix
+    # 773. Sliding Puzzle
+    def slidingPuzzle(self, board):
+        """
+        :type board: List[List[int]]
+        :rtype: int
+        """
+        # 把初始板子換成一維list
+        start = []
+        for row in board:
+            start += row
+        
+        # 這是要達到的狀態    
+        goal = "123450"
+        
+        if ''.join(map(str,start)) == goal:
+            return 0
+        
+        # 當0在某個位置，他可以交換的位置，例如0在4他可以和位置1,3,5換
+        swap = [(1,3),(0,2,4),(1,5),(0,4),(1,3,5),(2,4)]
+        
+        steps = 0
+        visited = set()
+        q = collections.deque()
+        q.append(start)
+        
+        while q:
+            steps += 1
+            
+            # 要把目前延伸出去的全部做完才算一步
+            qsize = len(q)
+            while qsize>0:
+                state = q.popleft()
+                index = state.index(0)
+                for direct in swap[index]:
+                    state[index],state[direct] = state[direct],state[index]
+                    newState = ''.join(map(str,state))
+                    if newState not in visited:
+                        if newState == goal:
+                            return steps
+                        q.append(state[::])
+                        visited.add(newState)
+                    state[index],state[direct] = state[direct],state[index]
+                qsize -= 1
+            
+        return -1
