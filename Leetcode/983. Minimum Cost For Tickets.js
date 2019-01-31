@@ -10,7 +10,7 @@ var mincostTickets = function(days, costs) {
   let dayIncluded = new Array(totalDays);
   dayIncluded.fill(false);
   
-  // 根據題目坐船日期，設定dayIncluded
+  // 根據題目的坐船日期，設定dayIncluded
   for (let day of days) {
       dayIncluded[day] = true;
   }
@@ -48,5 +48,5 @@ var mincostTickets = function(days, costs) {
   return minCost[totalDays-1];
 };
 
-console.log(mincostTickets([1,4,6,7,8,20], [2,7,15]));
-console.log(mincostTickets([1,2,3,4,6,7,29,30], [2,7,30]));
+console.log(mincostTickets([1,4,6,7,8,20], [2,7,15])); // 11
+console.log(mincostTickets([1,2,3,4,6,7,29,30], [2,7,30])); // 11
