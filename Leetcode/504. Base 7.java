@@ -21,4 +21,24 @@ class Solution {
       
       return String.join("", ans);
   }
+
+  // A faster solution
+  public String convertToBase72(int num) {
+    int ans = 0;
+    int base = 1;
+    int signed = 1;
+    
+    if (num < 0) {
+        signed = -1;
+        num *= -1;
+    }
+    
+    while (num > 0) {
+        ans += ((num % 7) * base);
+        num /= 7;
+        base *= 10;
+    }
+    
+    return String.valueOf(signed * ans);
+}
 }
