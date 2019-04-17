@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Solution {
+class Solution1 {
   public List<List<Integer>> generate(int numRows) {
       List<List<Integer>> ans = new ArrayList<List<Integer>>();
       if (numRows == 0) { return ans; }
