@@ -14,7 +14,6 @@ class Solution {
       
       int start = 0;
       int end = 0;
-      int anchor = 0;
       
       for (int i = 0; i < S.length(); i++) {
           end = Math.max(end, map.get(S.charAt(i)));
