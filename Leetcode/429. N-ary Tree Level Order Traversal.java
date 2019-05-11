@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Queue;
 
 class Solution {
+  // Using BFS beats 5.75%
   public List<List<Integer>> levelOrder(Node root) {
       List<List<Integer>> res = new ArrayList<List<Integer>>();
       if (root == null) { return res; }
@@ -27,5 +28,22 @@ class Solution {
           res.add(level);
       }
       return res;
+  }
+  // Using DFS beats 100%
+  public List<List<Integer>> levelOrder2(Node root) {
+    List<List<Integer>> res = new ArrayList<List<Integer>>();
+    if (root == null) { return res; }
+    helper(root, 1, res);
+    return res;
+  }
+  private void helper(Node node, int level, List<List<Integer>> res) {
+      if (node == null) { return; }
+      if (res.size() < level) {
+          res.add(new ArrayList<Integer>());
+      }
+      res.get(level - 1).add(node.val);
+      for (Node n: node.children) {
+          if (n != null) { helper(n, level + 1, res); }
+      }
   }
 }
