@@ -4,9 +4,9 @@ import java.util.List;
 class Solution {
   public String[] findWords(String[] words) {
       if (words == null || words.length == 0) { return new String[0]; }
-      String keyRow1 = "qwertyuiop";
-      String keyRow2 = "asdfghjkl";
-      String keyRow3 = "zxcvbnm";
+      final String keyRow1 = "qwertyuiop";
+      final String keyRow2 = "asdfghjkl";
+      final String keyRow3 = "zxcvbnm";
       List<String> res = new ArrayList<>();
       
       for (String word: words) {
