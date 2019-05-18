@@ -14,4 +14,14 @@ class Solution {
       }
       return res.reverse().toString();
   }
+  // Get rid of if-else
+  public String convertToTitle2(int n) {
+    StringBuilder res = new StringBuilder();
+    
+    while (n > 0) {
+        res.append((char)(--n % 26 + 'A'));
+        n /= 26;
+    }
+    return res.reverse().toString();
+}
 }
