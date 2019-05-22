@@ -14,7 +14,7 @@ class Solution {
           if (isCharANumber(ch)) {
               num = Integer.parseInt(String.valueOf(ch));
               while (((index + 1) < s.length()) && isCharANumber(s.charAt(index+1))) {
-                  num = (num * 10) + Integer.parseInt(String.valueOf(s.charAt(index+1)));
+                  num = (num * 10) + (s.charAt(index+1) - '0');;
                   index++;
               }
           }
