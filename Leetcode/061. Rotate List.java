@@ -13,7 +13,7 @@ class Solution {
       
       // If k is very large, we don't need to computer so much.
       k = k % length;
-      
+
       if (k == 0) { return head; }
       
       ListNode fast = head;
