@@ -12,9 +12,9 @@ class Solution {
      */
 public int maxProduct(String[] words) {
     if (words == null || words.length == 0) { return 0; }
-    int[] bits = new int[26];
     int res = 0;
     int len = words.length;
+    int[] bits = new int[len];
 
     for (int i = 0; i < len; i++) {
         
