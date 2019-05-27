@@ -1,15 +1,11 @@
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 class Solution {
   public ListNode mergeKLists(ListNode[] lists) {
       if (lists == null || lists.length == 0) { return null; }
       ListNode head = new ListNode(-1);
-      PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>(new Comparator<ListNode>() {
-          public int compare(ListNode a, ListNode b) {
-              return a.val - b.val;
-          }
-      });
+      PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>((a, b) -> (a.val - b.val));
+      
       ListNode dummy = head;
       
       for (ListNode list: lists) {
@@ -17,7 +13,7 @@ class Solution {
               minHeap.offer(list);
           }
       }
-      
+
       while (!minHeap.isEmpty()) {
           ListNode node = minHeap.poll();
           dummy.next = node;
@@ -31,4 +27,3 @@ class Solution {
       return head.next;  
   }
 }
-
