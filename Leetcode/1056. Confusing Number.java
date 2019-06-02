@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 class Solution {
   public boolean confusingNumber(int N) {
       Map<Integer, Integer> map = new HashMap<>();
