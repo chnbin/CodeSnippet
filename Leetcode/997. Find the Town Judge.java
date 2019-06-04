@@ -1,5 +1,9 @@
 class Solution {
   public int findJudge(int N, int[][] trust) {
+      /**
+       * According to problem description, the town judge is the people who's
+       * in-degree is N - 1 and out-degree is 0.
+       */
       int[] inDegree = new int[N + 1];
       int[] outDegree = new int[N + 1];
       
