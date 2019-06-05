@@ -12,7 +12,7 @@ class Solution {
       for (int i = 2; i < len; i++) {
           /**
            * dp[i] is the max money in the i-th location.
-           * In i-th location, thive can choose steal i-th location or not.
+           * In i-th location, robber can choose steal i-th location or not.
            * If he decides to steal i-th location, dp[i] = nums[i] + dp[i-2].
            * If he decides to pass i-th location, dp[i] = dp[i-1];
            */
