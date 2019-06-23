@@ -5,6 +5,7 @@ class Solution {
       if (root == null) { return -1; }
       LinkedList<TreeNode> stack = new LinkedList<>();
       
+      // Inorder traverse
       while (true) {
           while (root != null) {
               stack.push(root);
