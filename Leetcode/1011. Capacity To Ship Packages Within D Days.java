@@ -2,13 +2,11 @@ class Solution {
   public int shipWithinDays(int[] weights, int D) {
       int left = maxOfArray(weights);
       int right = sumOfArray(weights);
-      int res = 0;
       
       while (left <= right) {
           int mid = (left + right) / 2;
           if (getDDay(weights, mid) <= D) {
               right = mid - 1;
-              res = mid;
           } else {
               left = mid + 1;
           } 
@@ -17,7 +15,7 @@ class Solution {
           int day = getDDay(weights, i);
           System.out.println(i + ": " + day);
       }*/
-      return res;
+      return left;
   }
   
   private int maxOfArray(int[] nums) {
