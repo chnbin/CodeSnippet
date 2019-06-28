@@ -6,8 +6,7 @@ class Solution {
 
       HashMap<Character, Integer> dict = new HashMap<Character, Integer>();
       int len = Integer.MIN_VALUE;
-      int start = 0;
-      int end = 0;
+      int start = 0, end = 0;
       
       for(char c: s.toCharArray()) {
           if (!dict.containsKey(c)) {
