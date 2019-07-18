@@ -10,7 +10,7 @@ import java.util.Set;
 class Solution {
   public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
       if (K == 0) {
-          List<Integer> res = new List<>();
+          List<Integer> res = new ArrayList<>();
           res.add(target.val);
           return res;
       }
