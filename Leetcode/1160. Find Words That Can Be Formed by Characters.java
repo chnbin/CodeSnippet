@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Solution {
   public int countCharacters(String[] words, String chars) {
       int res = 0;
