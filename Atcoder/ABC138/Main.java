@@ -53,50 +53,39 @@ public class Main {
   }
 
   private static void notSolveD() {
-  	// TLE
     FastReader sc = new FastReader();
     int n = sc.nextInt();
     int q = sc.nextInt();
-    int[] val = new int[n+1];
     
-    HashMap<Integer, ArrayList<Integer>> tree = new HashMap<>();
-    // tree.put(1, new ArrayList<Integer>());
+    // Key is child, value is root
+    Map<Integer, Integer> tree = new HashMap<>();
+    long[] counter = new long[n+1];
     
-    for (int i = 1; i < n; i++) {
-      int r = sc.nextInt();
-      int c = sc.nextInt();
-      
-      for (int j = 1; j <= n; j++) {
-        if (j == r) {
-          if (!tree.containsKey(j)) {
-            tree.put(j, new ArrayList<Integer>());
-          }
-          tree.get(j).add(c);
-          if (!tree.containsKey(c)) {
-            tree.put(c, new ArrayList<Integer>());
-          }
-        }
-      }
+    
+    // Build tree
+    for (int i = 0; i < n - 1; i++) {
+      int v = sc.nextInt();
+      int w = sc.nextInt();
+      tree.put(w, v);
+
     }
     
-    for (int i = 0; i <q; i++) {
-      int node = sc.nextInt();
-      int value = sc.nextInt();
-      
-      for (int j = 1; j <= n; j++) {
-        if (j == node) {
-          val[j] += value;
-          dfs(tree, tree.get(j), val, value);
-        }
-      }
-      
+    for (int i = 0; i < q; i++) {
+      int v = sc.nextInt();
+      int weight = sc.nextInt();
+      counter[v] += weight;
     }
     
-    for (int i = 1; i < val.length; i++) {
-      if (i == val.length) {
-        System.out.println(val[i]);
+    // Compute all node's counter from node 2 (node 1 is root)
+    for (int i = 2; i <= n; i++) {
+      counter[i] += counter[tree.get(i)];
+    }
+    
+    for (int i = 1; i < counter.length; i++) {
+      if (i == counter.length - 1) {
+        System.out.println(counter[i]);
       } else {
-        System.out.print(val[i] + " ");
+        System.out.print(counter[i] + " ");
       }
     }
   }
