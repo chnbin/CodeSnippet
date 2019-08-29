@@ -14,6 +14,7 @@ public class Main {
     solveA();
     solveB();
     solveC();
+    solveD();
   }
   
 
@@ -68,7 +69,27 @@ public class Main {
     System.out.println(res);
   }
 
-
+  private static void solveD() {
+    FastReader sc = new FastReader();
+    String s = sc.next();
+    int len = s.length();
+    
+    for (int i = 1; i < len; i++) {
+      if (s.charAt(i) == s.charAt(i - 1)) {
+        System.out.println((i) + " " + (i + 1));
+      System.exit(0);
+      }
+    }
+    
+    for (int i = 2; i < len; i++) {
+      if (s.charAt(i) == s.charAt(i - 2)) {
+        System.out.println((i - 1) + " " + (i + 1));
+      System.exit(0);
+      }
+    }
+    
+    System.out.println("-1 -1");
+  }
   static class FastReader {
     BufferedReader br;
     StringTokenizer st;
