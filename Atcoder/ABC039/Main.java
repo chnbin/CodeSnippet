@@ -44,11 +44,78 @@ public class Main {
   }
 
   private static void solveD() {
-     FastReader sc = new FastReader();
-    long n = sc.nextLong();
-    long m = n - 1;
-    long res = ((1 + m) * m)/2;
-    System.out.println(res);
+    FastReader sc = new FastReader();
+    int h = sc.nextInt();
+    int w = sc.nextInt();
+    char[][] image = new char[h][w];
+    
+    int[][] directions = {
+        {-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}};
+    
+    for (int i = 0; i < h; i++) {
+      String row = sc.next();
+      for (int j = 0; j < row.length(); j++) {
+        image[i][j] = row.charAt(j);
+      }
+    }
+    
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        char c = image[i][j];
+        if (c == '#' || c == 'f') {
+          int pixels = 0;
+          int blackPixels = 0;
+          
+          for (int k = 0; k < directions.length; k++) {
+            int dx = i + directions[k][0];
+            int dy = j + directions[k][1];
+            if ((0 <= dx) && (dx < h) && (0 <= dy) && (dy < w)) {
+              pixels++;
+              if (image[dx][dy] == '#' || image[dx][dy] == 'F' || image[dx][dy] == 'f') {
+                blackPixels++;
+              }
+            }
+          }
+          
+          if (pixels == blackPixels) {
+            image[i][j] = 'F';
+            for (int k = 0; k < directions.length; k++) {
+              int dx = i + directions[k][0];
+              int dy = j + directions[k][1];
+              if ((0 <= dx) && (dx < h) && (0 <= dy) && (dy < w) && image[dx][dy] != 'F') {
+                image[dx][dy] = 'f';
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    boolean isBlackPixelsExist = false;
+    
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        if (image[i][j] == 'F') {
+          image[i][j] = '#';
+        } else if (image[i][j] == 'f') {
+          image[i][j] = '.';
+        } else if (image[i][j] == '#') {
+          isBlackPixelsExist = true;
+        }
+      }
+    }
+    
+    if (isBlackPixelsExist) {
+      System.out.println("impossible");
+    } else {
+      System.out.println("possible");
+      for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+          System.out.print(image[i][j]);
+        }
+        System.out.println("");
+      }
+    }
   }
 
   static class FastReader {
