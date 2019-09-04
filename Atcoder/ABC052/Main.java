@@ -11,6 +11,7 @@ public class Main {
     solveA();
     solveB();
     solveC();
+    solveD();
   }
   
   private static void solveA() {
@@ -76,6 +77,25 @@ public class Main {
     }
 
     System.out.println(res/2);
+  }
+
+  private static void solveD() {
+    FastReader sc = new FastReader();
+    int n = sc.nextInt();
+    int a = sc.nextInt();
+    int b = sc.nextInt();
+    long[] street = new long[n];
+
+    long res = 0l;
+    for (int i = 0; i < n; i++) {
+      street[i] = sc.nextLong();
+    }
+    
+    for (int i = 1; i < n; i++) {
+      res += (Math.min((street[i] - street[i-1]) * a, b));
+    }
+    
+    System.out.println(res);
   }
 
   static class FastReader {
