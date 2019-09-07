@@ -2,18 +2,17 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 public class Main {
-  final static int MOD = 10007;
-
+  private static final long MOD = (long)Math.pow(10, 9) + 7;
   public static void main(String[] args) {
     solveA();
     solveB();
     solveC();
+    solveD();
   }
   
 
@@ -64,6 +63,47 @@ public class Main {
     
   }
 
+  private static void solveD() {
+    FastReader sc = new FastReader();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    long res = 0l;
+    int[][] q = new int[m][2];
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    
+    for (int i = 0; i < n; i++) {
+      int a = sc.nextInt();
+      pq.offer(a);
+      res += a;
+    }
+    
+    for (int i = 0; i < m; i++) {
+      q[i][0] = sc.nextInt();
+      q[i][1] = sc.nextInt();
+    }
+    Arrays.sort(q, (a, b) -> (b[1] - a[1]));
+    
+    for (int i = 0; i < m; i++) {
+      int b = q[i][0];
+      int c = q[i][1];
+      int min = pq.peek();
+      if (c < min) { break;}
+      
+      while (b > 0) {
+        min = pq.poll();
+        if (c > min) {
+          pq.offer(c);
+          res = res - min + c;
+        } else {
+          pq.offer(min);
+          break;
+        }
+        b--;
+      }
+    }
+
+    System.out.println(res);
+  }
 
   static class FastReader {
     BufferedReader br;
