@@ -11,6 +11,7 @@ public class Main {
     solveA();
     solveB();
     solveC();
+    solveD();
   }
   
   private static void solveA() {
@@ -42,7 +43,6 @@ public class Main {
     System.out.println(res+1);
   }
 
-
   private static void solveC() {
     FastReader sc = new FastReader();
     int a = sc.nextInt();
@@ -56,6 +56,43 @@ public class Main {
       res = 1;
     }
     System.out.println(minMax + " " + res);
+  }
+
+  private static void solveD() {
+    FastReader sc = new FastReader();
+    int n = sc.nextInt();
+    long k = sc.nextLong();
+    int[] nums = new int[n];
+    
+    for (int i = 0; i < n; i++) {
+      nums[i] = sc.nextInt();
+    }
+
+    long res = 0;
+    long sum = 0;
+    int r = 0;
+    
+    // Tow pointer
+    // l與r都從0開始，一個一個找，只要sum(l, r) >= K
+    // 則代表 sum(l, r), sum(l, r+1), sum(l, r+2),...,sum(l, n-1)都是>=k
+    // 因此共n - r + 1個。
+    // 然後往下一個l繼續找
+    // 也可以用Binary search, 變成binary serach + function
+    for (int l = 0; l < n; l++) {
+      while (sum < k) {
+        if (r == n) {
+          break;
+        } else {
+          sum += nums[r];
+          r++;
+        }
+      }
+      if (sum >=k) {
+        res += (n - r + 1);
+        sum -= nums[l];
+      }
+    }
+    System.out.println(res);
   }
 
   static class FastReader {
