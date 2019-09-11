@@ -17,6 +17,7 @@ public class Main {
     solveA();
     solveB();
     solveC();
+    solveD();
   }
   
 
@@ -64,6 +65,36 @@ public class Main {
       res = Math.max(res, v);
     }
     System.out.println(res);
+  }
+
+  private static void solveD() {
+    FastReader sc = new FastReader();
+    int n = sc.nextInt();
+    int[] nums = new int[n+2];
+    int cnt = 0;
+    
+    for (int i = 0; i < n; i++) {
+      int num = sc.nextInt();
+      nums[i+1] = num;
+      if (num == (i+1)) { cnt++; }
+    }
+    
+    if (cnt == 0) {
+      System.out.println(cnt);
+      System.exit(0);
+    }
+    cnt = 0;
+    
+    for (int i = 1; i <= n; i++) {
+      if (nums[i] == i) {
+        cnt++;
+        int tmp = nums[i];
+        nums[i] = nums[i+1];
+        nums[i+1] = tmp;
+      }
+    }
+    
+    System.out.println(cnt);
   }
 
   static class FastReader {
