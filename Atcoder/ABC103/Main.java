@@ -6,12 +6,14 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
+import java.util.Arrays;
 
 public class Main {
   public static void main(String[] args) {
     solveA();
     solveB();
     solveC();
+    solveD();
   }
   
 
@@ -50,6 +52,35 @@ public class Main {
       res += (num - 1);
     }
     
+    System.out.println(res);
+  }
+
+  private static void solveD() {
+    FastReader sc = new FastReader();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
+    int[][] ab = new int[m][2];
+    
+    for (int i = 0; i < m; i++) {
+      int a = sc.nextInt();
+      int b = sc.nextInt();
+      ab[i][0] = a;
+      ab[i][1] = b;
+    }
+    
+    Arrays.sort(ab, (x, y) -> y[0] - x[0]);
+    int res = 0;
+    int prev = Integer.MAX_VALUE;
+    for (int i = 0; i < m; i++) {
+      System.out.println(Arrays.toString(ab[i]));
+    }
+    
+    for (int i = 0; i < m; i++) {
+      if (prev >= ab[i][1]) {
+        prev = ab[i][0];
+        res++;
+      }
+    }
     System.out.println(res);
   }
 
