@@ -35,3 +35,14 @@ class Solution {
       
   }
 }
+whbrjpjyhsrywlqjxdbrbaomnw 26 r = 3
+whbrrpjyhsrrwlqjxdbrraomn
+whrrrpjyhrrrwlqhxdrrraom
+wrrrrpjyrrrrwlqhxrrrrao
+rrrrrpjrrrrrwlqhrrrrrao
+rrrrrrjrrrrrwlqrrrrrra
+rrrrrrrrrrrrrlqrrrrrr
+rrrrrrrr
+serval
+ssrva
+sssv
