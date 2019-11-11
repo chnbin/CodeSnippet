@@ -11,31 +11,32 @@ public class Main {
     solveA();
     solveB();
     solveC();
-    solveD();
   }
   
   private static void solveA() {
     FastReader sc = new FastReader();
-    int a = sc.nextInt();
-    int b = sc.nextInt();
-    int c = sc.nextInt();
-    if (b > a) { b = a; }
-    if (c < (a - b)) {
-      System.out.println("0");
-    } else {
-      System.out.println(c- (a -b));
-    }
+    String s = sc.next();
+    System.out.println("ABC" + s);
   }
   
   private static void solveB() {
     FastReader sc = new FastReader();
     int n = sc.nextInt();
     int res = 0;
-    
-    for (int i = 1 ; i <= n; i++) {
-      if (String.valueOf(i).length() % 2 == 1) {
-        res++;
-      }
+    if (n >= 64 && n <= 100) {
+      res = 64;
+    } else if (n >= 32 && n <= 63) {
+      res = 32;
+    } else if (n >= 16 && n <= 31) {
+      res = 16;
+    } else if (n >= 8 && n <= 15) {
+      res = 8;
+    } else if (n >= 4 && n <= 7) {
+      res = 4;
+    } else if (n >= 2 && n <= 3) {
+      res = 2;
+    } else {
+      res = 1;
     }
     System.out.println(res);
   }
@@ -43,113 +44,28 @@ public class Main {
   private static void solveC() {
     FastReader sc = new FastReader();
     int n = sc.nextInt();
-    long[] dp = new long[n+1];
     int m = sc.nextInt();
+    boolean[] isLand1ToLandx = new boolean[n + 1];
+    boolean[] isLandxToLandn = new boolean[n + 1];
     
-    for (int i = 0; i< m; i++) {
+    for (int i = 0; i < m; i++) {
       int a = sc.nextInt();
-      dp[a] = -1;
-    }
-    
-    dp[0] = (dp[0] == 0) ? 1 : -1;
-    dp[1] = (dp[1] == 0) ? 1 : -1;
-    
-    for (int i = 2; i < dp.length;i++) {
-      if (dp[i] != -1) {
-        long step1 = (dp[i-1] == -1) ? 0 : dp[i-1];
-        long step2 = (dp[i-2] == -1) ? 0 : dp[i-2];
-        
-        dp[i] = (step1 + step2) % MOD;
-      }
+      int b = sc.nextInt();
       
+      if (a == 1) { isLand1ToLandx[b] = true; }
+      if (b == n) { isLandxToLandn[a] = true; }
     }
     
-    System.out.println(dp[dp.length-1]);
-  }
-  
-  private static void solveD() {
-    FastReader sc = new FastReader();
-    int h = sc.nextInt();
-    int w = sc.nextInt();
-    char[][] room = new char[h][w];
-    int[][] down = new int[h][w];
-    int[][] up = new int[h][w];
-    int[][] left = new int[h][w];
-    int[][] right = new int[h][w];
-    int res = 0;
-    
-    for (int i = 0; i < h; i++) {
-      String s = sc.next();
-      for (int j = 0; j < w; j++) {
-        room[i][j] = s.charAt(j);
-      }
-    }
-    
-    // Down
-    for (int j = 0; j < w; j++) {
-      int light = 0;
-      for(int i = 0; i < h; i++) {
-        if (room[i][j] == '#') {
-          light = 0;
-        } else {
-          light++;
-          down[i][j] = light;
+    for (int i = 1; i < isLand1ToLandx.length; i++) {
+      if (isLand1ToLandx[i]) {
+        if (isLandxToLandn[i]) {
+          System.out.println("POSSIBLE");
+          System.exit(0);
         }
       }
     }
     
-    // Up
-    for (int j = 0; j < w; j++) {
-      int light = 0;
-      for(int i = h - 1; i >= 0; i--) {
-        if (room[i][j] == '#') {
-          light = 0;
-        } else {
-          light++;
-          up[i][j] = light;
-        }
-      }
-    }
-    
-    // Left
-    for (int i = 0; i < h; i++) {
-      int light = 0;
-      for(int j = 0; j < w; j++) {
-        if (room[i][j] == '#') {
-          light = 0;
-        } else {
-          light++;
-          left[i][j] = light;
-        }
-      }
-    }
-    
-    // Right
-    for (int i = 0; i < h; i++) {
-      int light = 0;
-      for(int j = w - 1; j >= 0; j--) {
-        if (room[i][j] == '#') {
-          light = 0;
-        } else {
-          light++;
-          right[i][j] = light;
-        }
-      }
-    }
-    
-    // for (int i = 0; i < h; i++) {
-    //  System.out.println(Arrays.toString(right[i]));
-    // }
-    
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        if (room[i][j] != '#') {
-          int currLight = left[i][j]+right[i][j]+up[i][j]+down[i][j] - 3;
-          res = Math.max(res, currLight);
-        }
-      }
-    }
-    System.out.println(res);
+    System.out.println("IMPOSSIBLE");
   }
 
   static class FastReader { 

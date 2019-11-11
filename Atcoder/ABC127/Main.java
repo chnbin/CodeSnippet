@@ -18,49 +18,64 @@ public class Main {
 
   private static void solveA() {
     FastReader sc = new FastReader();
-    int a = sc.nextInt();
-    int b = sc.nextInt();
-    int cost = b;
-    
-    if (a <= 5) {
-      cost = 0;
-    } else if (a >= 6 && a <=12) {
-      cost = b / 2 ;
-    }
-    System.out.println(cost);
+    int x = sc.nextInt();
+    int y = sc.nextInt();
+    System.out.println(x + (y / 2));
   }
 
   private static void solveB() {
     FastReader sc = new FastReader();
-    int r = sc.nextInt();
-    int d = sc.nextInt();
-    int total = sc.nextInt();
+    int n = sc.nextInt();
+    int t = sc.nextInt();
+    int a = sc.nextInt();
+    int[] h = new int[n];
     
-    for (int i = 0; i < 10; i++) {
-      total = (r * total - d);
-      System.out.println(total);
+    for (int i = 0; i < n; i++) {
+      h[i] = sc.nextInt();
     }
+    double near = Double.MAX_VALUE;
+    int res = -1;
+    
+    for (int i = 0; i < n; i++) {
+      double temperature = Math.abs(a*1.0 -(t*1.0 - h[i]*1.0*0.006));
+      if (temperature < near) {
+        near = temperature;
+        res = i+1;
+      }
+    }
+    
+    System.out.println(res);
   }
 
   private static void solveC() {
     FastReader sc = new FastReader();
     int n = sc.nextInt();
     int m = sc.nextInt();
-    int maxLeft = Integer.MIN_VALUE;
-    int minRight = Integer.MAX_VALUE;
+    
+    int[] count = new int[n+1];
+    int[][] cities = new int[m][3];
+    String[] res = new String[m];
     
     for (int i = 0; i < m; i++) {
-      int l = sc.nextInt();
-      int r = sc.nextInt();
-      maxLeft = Math.max(maxLeft, l);
-      minRight = Math.min(minRight, r);
+      int P = sc.nextInt();
+      int Y = sc.nextInt();
+      
+      cities[i] = new int[]{P, Y, i};
     }
     
-    if (minRight - maxLeft + 1 >= 0) {
-      System.out.println(minRight - maxLeft + 1);
-    } else {
-      System.out.println("0");
+    Arrays.sort(cities, (a, b) -> (a[1] - b[1]));
     
+    for (int i = 0; i < m ; i++) {
+      //System.out.println(Arrays.toString(cities[i]));
+      count[cities[i][0]]++;
+      String s = String.format("%06d%06d", cities[i][0], count[cities[i][0]]);
+      res[cities[i][2]] = s;
+    }
+    
+    for (String s: res) {
+      System.out.println(s);
+    }
+
   }
 
   private static void solveD() {

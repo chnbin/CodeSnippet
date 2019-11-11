@@ -1,12 +1,14 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class Main {
   public static void main(String[] args) {
@@ -18,68 +20,85 @@ public class Main {
   
 
   private static void solveA() {
-  FastReader sc = new FastReader();
-    int[] nums = new int[3];
-    
-    for (int i = 0; i < 3; i++) {
-      nums[i] = sc.nextInt();
-    }
-    Arrays.sort(nums);
-    
-    System.out.println((nums[1] - nums[0]) + (nums[2] - nums[1]));
+    FastReader sc = new FastReader();
+    Map<String, String> map = new HashMap<>();
+    map.put("Sunny", "Cloudy");
+    map.put("Cloudy", "Rainy");
+    map.put("Rainy", "Sunny");
+    String s = sc.next();
+    System.out.println(map.get(s));
   }
 
   private static void solveB() {
     FastReader sc = new FastReader();
-    String s = sc.next();
-    String t = sc.next();
-    s += s;
+    String rud = "RUD";
+    String lud = "LUD";
     
-    if (s.indexOf(t) == -1) {
-      System.out.println("No");
-    } else {
-      System.out.println("Yes");
+    String s = sc.next();
+    
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (i % 2 == 1) {
+        if (c == 'R') {
+          System.out.println("No");
+          return ;
+        } 
+      } else {
+        if (c == 'L') {
+          System.out.println("No");
+          return ;
+        } 
+      }
     }
+    System.out.println("Yes");
+    
   }
 
   private static void solveC() {
     FastReader sc = new FastReader();
     int n = sc.nextInt();
-    long res = 0;
+    int k = sc.nextInt();
+    int q = sc.nextInt();
     
-    for (int i = 0; i < n; i++) {
-      int num = sc.nextInt();
-      res += (num - 1);
+    int[] player = new int[n+1];
+    Arrays.fill(player, k);
+    
+    for (int i = 0; i < q; i++) {
+      int getScore = sc.nextInt();
+      player[getScore]++;
     }
     
-    System.out.println(res);
+    for (int i = 1; i <=n; i++) {
+      int result = player[i] - q;
+      if (result > 0) {
+        System.out.println("Yes");
+      } else {
+        System.out.println("No");
+      }
+    }
+    
   }
 
   private static void solveD() {
     FastReader sc = new FastReader();
-    int n = sc.nextInt();
-    int m = sc.nextInt();
-    int[][] ab = new int[m][2];
+    long n = sc.nextLong();
+    long m = sc.nextLong();
+    long res = 0l;
     
-    for (int i = 0; i < m; i++) {
-      int a = sc.nextInt();
-      int b = sc.nextInt();
-      ab[i][0] = a;
-      ab[i][1] = b;
+    PriorityQueue<Long> pq = new PriorityQueue<>(Collections.reverseOrder());
+    
+    for (int i = 0; i < n; i++) {
+      long cost = sc.nextLong();
+      pq.offer(cost);
     }
     
-    Arrays.sort(ab, (x, y) -> y[0] - x[0]);
-    int res = 0;
-    int prev = Integer.MAX_VALUE;
-    for (int i = 0; i < m; i++) {
-      System.out.println(Arrays.toString(ab[i]));
+    while (m > 0) {
+      pq.add(pq.poll() / 2);
+      m--;
     }
     
-    for (int i = 0; i < m; i++) {
-      if (prev >= ab[i][1]) {
-        prev = ab[i][0];
-        res++;
-      }
+    while (!pq.isEmpty()) {
+      res += pq.poll();
     }
     System.out.println(res);
   }
