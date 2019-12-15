@@ -12,10 +12,7 @@ class Solution {
   public void combineHelper(int n, int k, int start, int end,
                             List<List<Integer>> ans, List<Integer> currAns) {
       if (currAns.size() == k) {
-          List<Integer> tmp = new ArrayList<Integer>();
-          for(int num: currAns) {
-              tmp.add(num);
-          }
+          List<Integer> tmp = new ArrayList<Integer>(currAns);
           ans.add(tmp);
       } else {
           for(int i = start; i < end; i++) {
