@@ -1,29 +1,19 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
   public boolean isValidBST(TreeNode root) {
-      List<Integer> tree = new ArrayList<Integer>();
-      inOrder(root, tree);
-      
-      if (tree.size() == 1) {
+      // 沒有點，或是一個點
+      if (root == null || (root.left == null && root.right == null)) {
           return true;
       }
-      
-      for (int i = 1; i < tree.size(); i++) {
-          if (tree.get(i) <= tree.get(i - 1)) {
-              return false;
-          }
-      }
-      
-      return true;
+      return isValidBSTHelper(root, Long.MIN_VALUE, Long.MAX_VALUE);
   }
   
-  public void inOrder(TreeNode node, List<Integer> list) {
-      if (node != null) {
-          inOrder(node.left, list);
-          list.add(node.val);
-          inOrder(node.right, list);
+  private boolean isValidBSTHelper(TreeNode node, long minValue, long maxValue) {
+      if (node == null) { return true; }
+      if (node.val >= maxValue || node.val <= minValue) {
+          return false;
       }
+      
+      return (isValidBSTHelper(node.left, minValue, node.val) &&
+              isValidBSTHelper(node.right, node.val, maxValue));
   }
 }
