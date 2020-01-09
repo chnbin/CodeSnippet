@@ -1,5 +1,27 @@
 class Solution {
   public int minimumSwap(String s1, String s2) {
+      /*
+        基本上，以xxyyxyxyxx與xyyxyxxxyx為例：
+        xxyyxyxyxx
+        xyyxyxxxyx
+         ^ ^^^ ^^
+        其實仔細分析比較一下，就會發現，已經對好的部分其實是可以不用管他。
+        要管的部分其實就是：
+        Xyxyyx
+        Yxyxxy
+        值得注意的是，如果不同的數量只有奇數組，這是沒有答案的。
+        而要交換的pattern，其實題目的範例已經為我們準備好。
+        xx yy -> 一次
+        Xy yx -> 二次
+        因此就是要把
+        Xyxyyx
+        Yxyxxy 變成xx yy這種組合最多的方式，才會得到最小。
+        一開始在這邊想了很久，但是之後發現，其實不管怎樣，上面的xy與下面的xy一定是相同個數，
+        因此此上面字串由小到大排序，下面的字串由大到小排：
+        Xxxyyy
+        Yyyxxx
+        就會達到我們要的目的。
+      */
       int res = 0;
       List<Character> same1 = new ArrayList<>();
       List<Character> same2 = new ArrayList<>();
