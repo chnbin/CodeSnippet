@@ -49,4 +49,24 @@ class Solution {
       }
       return false;
   }
+
+  public boolean isCousinsDFS(TreeNode root, int x, int y) {
+    // [0] is level; [1] is parent
+    int[] xInfo = new int[2];
+    int[] yInfo = new int[2];
+    isCousinsHelper(root, xInfo, x, 0, 0);
+    isCousinsHelper(root, yInfo, y, 0, 0);
+    return ((xInfo[0] == yInfo[0]) && (xInfo[1] != yInfo[1]));
+  }
+
+  private void isCousinsHelper(TreeNode node, int[] info, int target, int parent, int level) {
+    if (node == null) { return ; }
+    if (node.val == target) {
+        info[0] = level;
+        info[1] = parent;
+        return;
+    }
+    isCousinsHelper(node.left, info, target, node.val, level + 1);
+    isCousinsHelper(node.right, info, target, node.val, level + 1);
+  } 
 }
