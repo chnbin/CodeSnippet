@@ -1,17 +1,29 @@
 class Solution {
   public int maxSubArray(int[] nums) {
-      if (nums == null || nums.length == 0) { return 0; }
-      int[] dp = new int[nums.length + 1];
-      int res = Integer.MIN_VALUE;
-      for (int i = 1; i <= nums.length; i++) {
-          dp[i] = nums[i-1];
-          if ((dp[i-1]) > 0) {
-              dp[i] += dp[i-1];
-          }
+      return findMax(nums, 0, nums.length - 1);
+  }
+  
+  private int findMax(int[] nums, int left, int right) {
+      if (left >= right) { return nums[left]; }
+      
+      int mid = left + (right - left) / 2;
+      int lMax = findMax(nums, left, mid - 1);
+      int rMax = findMax(nums, mid + 1, right);
+      int mMax = nums[mid];
+      int tmp = nums[mid];
+      
+      for (int i = mid - 1; i >= left; i--) {
+          tmp += nums[i];
+          mMax = Math.max(mMax, tmp);
       }
-      for (int i = 1; i < dp.length; i++) {
-          res = Math.max(res, dp[i]);
+      
+      tmp = mMax;
+      
+      for (int i = mid + 1; i <= right; i++) {
+          tmp += nums[i];
+          mMax = Math.max(mMax, tmp);
       }
-      return res;
+      
+      return Math.max(mMax, Math.max(lMax, rMax));
   }
 }
