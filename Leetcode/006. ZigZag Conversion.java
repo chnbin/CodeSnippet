@@ -9,7 +9,7 @@ class Solution {
         int direction = -1;
 
         for (int i = 0; i < sb.length; i++) {
-            sb[i] = new StringBuilder("");
+            sb[i] = new StringBuilder();
         }
         
         for (char c: s.toCharArray()) {
