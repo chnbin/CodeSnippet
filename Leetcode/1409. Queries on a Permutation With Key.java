@@ -1,14 +1,17 @@
 class Solution {
   public int[] processQueries(int[] queries, int m) {
-      int nums[] = new int[m + 1];
+      int pos[] = new int[m + 1];
       int res[] = new int[queries.length];
       
       /* 
           我們可以維護一個整數陣列pos[]，記錄當前所有數字的位置
           初始時數字的位置對應其本身的數值減一
+          故m = 5時：
+          pos 0 1 2 3 4 5 6
+          num 0 0 1 2 3 4 5
       */
       for (int i = 1; i <= m; i++) {
-          nums[i] = i - 1;
+          pos[i] = i - 1;
       }
       
       /*
@@ -20,15 +23,15 @@ class Solution {
       */
       for (int i = 0; i < queries.length; i++) {
           int query = queries[i];
-          int index = nums[query];
+          int index = pos[query];
           res[i] = index;
           
           for (int j = 1; j <= m; j++) {
-              if (nums[j] < index) {
-                  nums[j]++;
+              if (pos[j] < index) {
+                  pos[j]++;
               }
           }
-          nums[query] = 0;
+          pos[query] = 0;
       }
       return res;
   }
