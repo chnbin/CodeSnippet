@@ -1,10 +1,8 @@
-package tmp;
-
- /*
+/*
   30 day leetcoding challenge
   Day 30. Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree
   https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/532/week-5/3315/
- */
+*/
 
 class Solution {
   public boolean isValidSequence(TreeNode root, int[] arr) {

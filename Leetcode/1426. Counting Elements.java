@@ -1,4 +1,3 @@
-package tmp;
 /*
   30 day leetcoding challenge
   Day 7. Counting Elements
