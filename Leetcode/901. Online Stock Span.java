@@ -1,5 +1,5 @@
 /*
-  Mononic stack, this problem is very similar with Problem 739. Daily Temperatures.
+  Monotonic stack, this problem is very similar with Problem 739. Daily Temperatures.
  */
 class StockSpanner {
   LinkedList<int[]> stack = new LinkedList<>();
