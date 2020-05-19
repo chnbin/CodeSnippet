@@ -1,3 +1,7 @@
+/*
+  Monotonic stack, this problem is very similar with Problem 901. Online Stock Span.
+ */
+
 class Solution {
   public int[] dailyTemperatures(int[] T) {
       int n = T.length;
