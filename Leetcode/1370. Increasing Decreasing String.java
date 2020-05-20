@@ -7,37 +7,33 @@ class Solution {
     Do step1 and step2 repeatly until we use all characters.
    */
   public String sortString(String s) {
-      String res = "";
-      int[] tables = new int[26];
-      int n = s.length();
-      
-      for (char c: s.toCharArray()) {
-          tables[c - 'a']++;
-      }
-      
-      int direction = 1;
-      
-      while (n > 0) {
-          if (direction == 1) {
-              for (int i = 0; i < 26; i++) {
-                  if (tables[i] > 0) {
-                      tables[i]--;
-                      res += (char)(i + 'a');
-                      n--;
-                  }
-              }
-          } else {
-              for (int i = 25; i >= 0; i--) {
-                  if (tables[i] > 0) {
-                      tables[i]--;
-                      res += (char)(i + 'a');
-                      n--;
-                  }
-              }
-          }
-          direction *= -1;
-      }
-      
-      return res;
+    String res = "";
+    int[] tables = new int[26];
+    int n = s.length();
+    
+    for (char c: s.toCharArray()) {
+        tables[c - 'a']++;
+    }
+    
+    while (n > 0) {
+        // Step 1
+        for (int i = 0; i < 26; i++) {
+            if (tables[i] > 0) {
+                tables[i]--;
+                res += (char)(i + 'a');
+                n--;
+            }
+        }
+        // Step 2
+        for (int i = 25; i >= 0; i--) {
+            if (tables[i] > 0) {
+                tables[i]--;
+                res += (char)(i + 'a');
+                n--;
+            }
+        }
+    }
+    
+    return res;
   }
 }
