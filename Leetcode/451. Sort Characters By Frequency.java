@@ -1,38 +1,41 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
-
 class Solution {
   public String frequencySort(String s) {
       if (s == null || s.length() == 0) { return ""; }
       Map<Character, Integer> map = new HashMap<>();
-      StringBuilder res = new StringBuilder();
       
+      // Step 1: Obtain frequence of each character and find the maximum frequence
+      int maxCnt = 0; // the maximum frequence of character
       for (char c: s.toCharArray()) {
           map.put(c, map.getOrDefault(c, 0) + 1);
+          maxCnt = Math.max(maxCnt, map.get(c));
       }
       
-      PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<Map.Entry<Character, Integer>>((a, b) -> (b.getValue() - a.getValue()));
+      // Step 2: Use array as bucket, the bucket number is the frequence
+      //         Put the character into corresponding bucket
+      List<Character>[] list = new ArrayList[maxCnt + 1];
       
-      for (Map.Entry pairs: map.entrySet()) {
-          maxHeap.offer(pairs);
+      for (Character c: map.keySet()) {
+          int freq = map.get(c);
+          if (list[freq] == null) {
+              list[freq] = new ArrayList<>();
+          }
+          list[freq].add(c);
       }
       
-      while (!maxHeap.isEmpty()) {
-          Map.Entry entry = maxHeap.poll();
-          System.out.println(entry.getKey());
-          char c = (char)entry.getKey();
-          int counter = (int)entry.getValue();
-          res.append(buildString(c, counter));
+      // Step 3. Build answer from bucket
+      StringBuilder sb = new StringBuilder();
+      
+      for (int i = list.length - 1; i >= 0; i--) {
+          List<Character> l = list[i];
+          if (l != null) {
+              for (Character chr: l) {
+                  for (int j = 0; j < i; j++) {
+                      sb.append(chr);
+                  }
+              }
+          }
       }
-      return res.toString();
-  }
-  
-  private String buildString(char c, int counter) {
-      String res = "";
-      for (int i = 0; i < counter; i++) {
-          res += c;
-      }
-      return res;
+      
+      return sb.toString();
   }
 }
