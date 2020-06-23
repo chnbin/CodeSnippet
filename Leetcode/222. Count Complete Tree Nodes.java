@@ -1,15 +1,37 @@
 class Solution {
   public int countNodes(TreeNode root) {
-      // Because the given tree is a complete tree, count nodes directly.
       if (root == null) { return 0; }
-      int result = 1;
-      if (root.left != null) {
-          result += countNodes(root.left);
+      int leftHeight = getLeftHeight(root) + 1;
+      int rightHeight = getRightHeight(root) + 1;
+      
+      if (leftHeight == rightHeight) {
+          return (2 << (leftHeight - 1)) - 1;
+      } else {
+          return 1 + countNodes(root.left) + countNodes(root.right);
+      }
+  }
+  
+  private int getLeftHeight(TreeNode node) {
+      if (node == null) { return 0; }
+      int height = 0;
+      
+      while (node.left != null) {
+          height++;
+          node = node.left;
       }
       
-      if (root.right != null) {
-          result += countNodes(root.right);
+      return height;
+  }
+  
+  private int getRightHeight(TreeNode node) {
+      if (node == null) { return 0; }
+      int height = 0;
+      
+      while (node.right != null) {
+          height++;
+          node = node.right;
       }
-      return result;
+      
+      return height;
   }
 }
