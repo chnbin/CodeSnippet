@@ -2,13 +2,11 @@ class Solution {
   public int numIdenticalPairs(int[] nums) {
       int res = 0;
       int n = nums.length;
+      int[] table = new int[101];
       
-      for (int i = 0; i < n - 1; i++) {
-          for (int j = i + 1; j < n; j++) {
-              if (nums[i] == nums[j]) {
-                  res++;
-              }
-          }
+      for (int i = 0; i < n; i++) {
+          res += table[nums[i]];
+          table[nums[i]]++;
       }
       
       return res;
