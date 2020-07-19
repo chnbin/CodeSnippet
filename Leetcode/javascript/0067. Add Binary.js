@@ -10,27 +10,22 @@ var addBinary = function(a, b) {
   let carry = 0;
   
   while (m >= 0 || n >= 0) {
-      let aInt = 0;
-      let bInt = 0;
-      
-      if (m >= 0) {
-          aInt = a[m] - '0';
-          m--;
+      let num1 = a[m] ? parseInt(a[m]) : 0;
+      let num2 = b[n] ? parseInt(b[n]) : 0;
+      let total = num1 + num2 + carry;
+      carry = 0;
+
+      if (total > 1) {
+        total = total % 2;
+        carry = 1;
       }
-      
-      if (n >= 0) {
-          bInt = b[n] - '0';
-          n--;
-      }
-      let total = aInt + bInt + carry;
-      carry = parseInt(total / 2);
-      total = parseInt(total % 2);
-      
-      res = +total + res;
+      res = `${total}${res}`;
+      m--;
+      n--;
   }
   
   if (carry > 0) {
-      res = +carry + res;
+      res = `${carry}${res}`;
   }
   
   return res;
