@@ -17,7 +17,7 @@ function maxDepth(root: TreeNode | null): number {
     if (root === null) { return 0; }
     
     let res: number[] = new Array(2).fill(0);
-    helper(root, 1, res);
+    helperMaxDepth(root, 1, res);
     return res[0];
 };
 
