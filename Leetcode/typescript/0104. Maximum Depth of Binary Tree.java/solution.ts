@@ -1,7 +1,7 @@
 /**
  * Definition for a binary tree node.
  **/
- class TreeNode {
+class TreeNode {
     val: number
     left: TreeNode | null
     right: TreeNode | null
@@ -11,7 +11,6 @@
          this.right = (right===undefined ? null : right)
      }
  }
- 
 
 function maxDepth(root: TreeNode | null): number {
     if (root === null) { return 0; }
