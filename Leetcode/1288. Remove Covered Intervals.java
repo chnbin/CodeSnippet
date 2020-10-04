@@ -1,20 +1,18 @@
 class Solution {
-  public int removeCoveredIntervals(int[][] intervals) {
-      int res = 0;
-      Arrays.sort(intervals, (a, b) -> (a[0] - b[0]));
-      
-      for (int i = intervals.length - 1; i >= 0; i--) {
-          int low = intervals[i][0];
-          int high = intervals[i][1];
-          
-          for (int j = 0; j < i; j++) {
-              if (low >= intervals[j][0] && intervals[j][1] >= high) {
-                  res++;
-                  break;
-              }
-          }
-      }
-      
-      return intervals.length - res;
-  }
+    public int removeCoveredIntervals(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        int[] currInt = {-1, -1};
+        int overlap = 0;
+        for(int[] interval: intervals) {
+            if(currInt[0] <= interval[0] && currInt[1] >= interval[1]) {
+                overlap++;
+            } else {
+                if(currInt[0] >= interval[0] && currInt[1] <= interval[1]) 
+                    overlap++;
+                currInt = interval;
+            }
+        }
+        
+        return intervals.length - overlap;
+    }
 }
